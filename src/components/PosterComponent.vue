@@ -1,7 +1,6 @@
 <template>
     <div class="card m-2">
         <h5>{{ title }}</h5>
-        <p>
         <h6>{{ original }}</h6> <br>
         <div class="flag">
             <img src="/images/de.png" v-if="language === 'de'">
@@ -16,10 +15,38 @@
             </div>
         </div>
         <br>
-        <small>{{ Math.round(vote) }}</small>
-        </p>
         <div>
-            <img :src="image">
+            <div v-if="Math.round(vote) === 10 || Math.round(vote) === 9">
+                <i class="fa-solid fa-star" v-for="n in 5"></i> <br>
+                <small>{{ vote.toFixed(2) }}</small>
+            </div>
+            <div v-else-if="Math.round(vote) === 8 || Math.round(vote) === 7">
+                <i class="fa-solid fa-star" v-for="n in 4"></i>
+                <i class="fa-regular fa-star"></i> <br>
+                <small>{{ vote.toFixed(2) }}</small>
+            </div>
+            <div v-else-if="Math.round(vote) === 6 || Math.round(vote) === 5">
+                <i class="fa-solid fa-star" v-for="n in 3"></i>
+                <i class="fa-regular fa-star" v-for="n in 2"></i> <br>
+                <small>{{ vote.toFixed(2) }}</small>
+            </div>
+            <div v-else-if="Math.round(vote) === 4 && Math.round(vote) === 3">
+                <i class="fa-solid fa-star" v-for="n in 2"></i>
+                <i class="fa-regular fa-star" v-for="n in 3"></i> <br>
+                <small>{{ vote.toFixed(2) }}</small>
+            </div>
+            <div v-else-if="Math.round(vote) === 2 && Math.round(vote) === 1">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-regular fa-star" v-for="n in 4"></i> <br>
+                <small>{{ vote.toFixed(2) }}</small>
+            </div>
+            <div v-else>
+                <i class="fa-regular fa-star" v-for="n in 5"></i> <br>
+                <small>{{ vote.toFixed() }}</small>
+            </div>
+            <div>
+                <img :src="image">
+            </div>
         </div>
     </div>
 </template>
