@@ -12,7 +12,8 @@
     <div class="row">
       <div class="col-12 col-md-4 col-lg-3" v-for="(serie, index) in store.listSeries" :key="serie.id">
         <PosterComponent :title="serie.name" :original="serie.original_name" :language="serie.original_language"
-          :vote="serie.vote_average" :image="'https://image.tmdb.org/t/p/w185' + serie.poster_path" />
+          :vote="serie.vote_average" :image="'https://image.tmdb.org/t/p/w185' + serie.poster_path"
+          :lang="serie.original_language" />
       </div>
     </div>
     <div class="col-12" v-if="store.error">

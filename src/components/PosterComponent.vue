@@ -5,11 +5,15 @@
         <h6>{{ original }}</h6> <br>
         <div class="flag">
             <img src="/images/de.png" v-if="language === 'de'">
-            <img src="/images/en.png" v-if="language === 'en'">
-            <img src="/images/fr.png" v-if="language === 'fr'">
-            <img src="/images/it.png" v-if="language === 'it'">
-            <img src="/images/jp.png" v-if="language === 'jp'">
-            <img src="/images/ko.png" v-if="language === 'ko'">
+            <img src="/images/en.png" v-else-if="language === 'en'">
+            <img src="/images/fr.png" v-else-if="language === 'fr'">
+            <img src="/images/it.png" v-else-if="language === 'it'">
+            <img src="/images/jp.png" v-else-if="language === 'ja'">
+            <img src="/images/ko.png" v-else-if="language === 'ko'">
+            <div v-else>
+                <img src="/images/notflag.png">
+                <p>{{ language }}</p>
+            </div>
         </div>
         <br>
         <small>{{ vote }}</small>
@@ -23,7 +27,7 @@
 <script>
 export default {
     name: 'PosterComponent',
-    props: ['title', 'original', 'language', 'vote', 'image']
+    props: ['title', 'original', 'language', 'vote', 'image', 'lang']
 }
 </script>
 
