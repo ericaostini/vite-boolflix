@@ -4,8 +4,8 @@
     <h2>Movies</h2>
     <div class="row">
       <div class="col-12 col-md-4 col-lg-3" v-for="(movie, index) in store.listFilm" :key="movie.id">
-        {{ movie.title }}
-        <img :src="'https://image.tmdb.org/t/p/w185' + movie.poster_path" alt="">
+        <PosterComponent :title="movie.title" :orginalT="movie.original_title" :language="movie.original_language"
+          :vote="movie.vote_average" :image="'https://image.tmdb.org/t/p/w185' + movie.poster_path" />
       </div>
     </div>
   </div>
@@ -13,6 +13,7 @@
 
 <script>
 import HeaderComponent from './components/HeaderComponent.vue';
+import PosterComponent from './components/PosterComponent.vue'
 import { store } from './data/store';
 import axios from 'axios';
 export default {
@@ -43,7 +44,7 @@ export default {
   created() {
     this.getSeries();
   },
-  components: { HeaderComponent }
+  components: { HeaderComponent, PosterComponent }
 }
 </script>
 
