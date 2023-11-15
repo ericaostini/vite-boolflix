@@ -37,7 +37,10 @@ export default {
 
 header {
     height: 100px;
+    width: 100%;
     background-color: $col-dark;
     padding: 20px;
+    position: fixed;
+    z-index: 1000;
 }
 </style>

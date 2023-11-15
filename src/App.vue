@@ -1,26 +1,30 @@
 <template>
   <div>
     <HeaderComponent @filter-series-film="resultSearch" />
-    <h2 v-show="store.listFilm.length > 1">Movies</h2>
-    <div class="row">
-      <div class="col-12 col-md-4 col-lg-3" v-for="(movie, index) in store.listFilm" :key="movie.id">
-        <PosterComponent :title="movie.title" :original="movie.original_title" :language="movie.original_language"
-          :vote="movie.vote_average" :image="'https://image.tmdb.org/t/p/w185' + movie.poster_path" />
+    <main>
+      <div class="container main-content">
+        <h4 v-show="store.listFilm.length > 1">Film trovati:</h4>
+        <div class="row justify-content-between">
+          <div class="col-5 col-md-4 col-lg-3" v-for="(movie, index) in store.listFilm" :key="movie.id">
+            <PosterComponent :title="movie.title" :original="movie.original_title" :language="movie.original_language"
+              :vote="movie.vote_average" :image="'https://image.tmdb.org/t/p/w185' + movie.poster_path" />
+          </div>
+        </div>
+        <h4 v-show="store.listFilm.length > 1">Serie Tv trovate</h4>
+        <div class="row justify-content-between">
+          <div class="col-5 col-md-4 col-lg-3" v-for="(serie, index) in store.listSeries" :key="serie.id">
+            <PosterComponent :title="serie.name" :original="serie.original_name" :language="serie.original_language"
+              :vote="serie.vote_average" :image="'https://image.tmdb.org/t/p/w185' + serie.poster_path"
+              :lang="serie.original_language" />
+          </div>
+        </div>
+        <div class="col-12" v-if="store.error">
+          <div class="alert alert-danger">
+            {{ store.error }}
+          </div>
+        </div>
       </div>
-    </div>
-    <h2 v-show="store.listFilm.length > 1">Series</h2>
-    <div class="row">
-      <div class="col-12 col-md-4 col-lg-3" v-for="(serie, index) in store.listSeries" :key="serie.id">
-        <PosterComponent :title="serie.name" :original="serie.original_name" :language="serie.original_language"
-          :vote="serie.vote_average" :image="'https://image.tmdb.org/t/p/w185' + serie.poster_path"
-          :lang="serie.original_language" />
-      </div>
-    </div>
-    <div class="col-12" v-if="store.error">
-      <div class="alert alert-danger">
-        {{ store.error }}
-      </div>
-    </div>
+    </main>
   </div>
 </template>
 
@@ -86,4 +90,17 @@ export default {
 
 <style lang="scss" scoped>
 @use './assets/style/partials/variables' as *;
+
+main {
+  background-color: $bg-main;
+
+  .main-content {
+
+    h4 {
+      color: $hColor;
+      padding-top: 120px;
+      padding-bottom: 10px;
+    }
+  }
+}
 </style>
