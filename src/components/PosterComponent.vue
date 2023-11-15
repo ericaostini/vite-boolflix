@@ -1,6 +1,7 @@
 <template>
     <div class="my-card">
         <img :src="image">
+
         <div class="card m-2 hover-info">
             <h5>{{ title }}</h5>
             <h6>{{ original }}</h6> <br>

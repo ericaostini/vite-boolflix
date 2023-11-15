@@ -1,14 +1,16 @@
 <template>
     <section>
-        <div>
-            <img src="/images/AtypicalTitle.png" alt="">
+        <div class="w-50">
+            <img :src="image">
+            <p class="py-5 text-light ">{{ info }}</p>
         </div>
     </section>
 </template>
 
 <script>
 export default {
-    name: 'MainComponent'
+    name: 'MainComponent',
+    props: ['image', 'info']
 }
 </script>
 
@@ -22,7 +24,7 @@ section {
         padding: 150px 50px;
 
         img {
-            width: 500px;
+            width: 450px;
         }
     }
 }

@@ -1,7 +1,8 @@
 <template>
   <div>
     <HeaderComponent @filter-series-film="resultSearch" />
-    <MainComponent v-show="store.listFilm.length < 1" />
+    <MainComponent v-show="store.listFilm.length < 1" :image="'/images/AtypicalTitle.png'"
+      :info="store.bestSeries.overview" />
     <main>
       <div class="container main-content">
         <h4 v-show="store.listFilm.length > 1" class="padding-fixed">Film trovati secondo la tua ricerca: {{
@@ -31,6 +32,7 @@
 </template>
 
 <script>
+import { generateCodeFrame } from '@vue/shared';
 import HeaderComponent from './components/HeaderComponent.vue';
 import MainComponent from './components/MainComponent.vue';
 import PosterComponent from './components/PosterComponent.vue';
@@ -45,7 +47,13 @@ export default {
         api_key: '99a0ce38f2911d2a4d167d4ff18195e6',
         query: null
       },
+      top: {
+        api_key: '99a0ce38f2911d2a4d167d4ff18195e6',
+        query: 'Atypical',
+      }
     }
+  },
+  created() {
   },
   methods: {
     resultSearch(search) {
@@ -77,15 +85,18 @@ export default {
         console.log(res.data.results);
         this.store.listFilm = res.data.results;
         console.log(this.store.listFilm);
-      });
+      })
     },
-    getFlag(flag) {
-      if (flag === "en") {
-        return
-      }
+    getBest() {
+      const seriesurl = this.store.apiUrl + this.store.endPoint.series
+      axios.get(seriesurl, { params: this.top }).then((res) => {
+        console.log(res.data.results[0])
+        this.store.bestSeries = res.data.results[0];
+      })
     }
   },
   created() {
+    this.getBest();
   },
   components: { HeaderComponent, PosterComponent, MainComponent }
 }
