@@ -1,6 +1,7 @@
 <template>
   <div>
     <HeaderComponent @filter-series-film="resultSearch" />
+    <MainComponent v-show="store.listFilm.length < 1" />
     <main>
       <div class="container main-content">
         <h4 v-show="store.listFilm.length > 1" class="padding-fixed">Film trovati secondo la tua ricerca: {{
@@ -31,7 +32,8 @@
 
 <script>
 import HeaderComponent from './components/HeaderComponent.vue';
-import PosterComponent from './components/PosterComponent.vue'
+import MainComponent from './components/MainComponent.vue';
+import PosterComponent from './components/PosterComponent.vue';
 import { store } from './data/store';
 import axios from 'axios';
 export default {
@@ -85,7 +87,7 @@ export default {
   },
   created() {
   },
-  components: { HeaderComponent, PosterComponent }
+  components: { HeaderComponent, PosterComponent, MainComponent }
 }
 </script>
 
