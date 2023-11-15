@@ -1,13 +1,21 @@
 <template>
   <div>
     <HeaderComponent @filter-series-film="resultSearch" />
-    <h2>Movies</h2>
+    <h2 v-show="store.listFilm.length > 1">Movies</h2>
     <div class="row">
       <div class="col-12 col-md-4 col-lg-3" v-for="(movie, index) in store.listFilm" :key="movie.id">
         <PosterComponent :title="movie.title" :original="movie.original_title" :language="movie.original_language"
           :vote="movie.vote_average" :image="'https://image.tmdb.org/t/p/w185' + movie.poster_path" />
       </div>
     </div>
+    <h2 v-show="store.listFilm.length > 1">Series</h2>
+    <div class="row">
+      <div class="col-12 col-md-4 col-lg-3" v-for="(serie, index) in store.listSeries" :key="serie.id">
+        <PosterComponent :title="serie.title" :original="serie.original_title" :language="serie.original_language"
+          :vote="serie.vote_average" :image="'https://image.tmdb.org/t/p/w185' + serie.poster_path" />
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -35,6 +43,8 @@ export default {
           api_key: '99a0ce38f2911d2a4d167d4ff18195e6',
           query: search
         }
+      } else {
+        delete this.params.query
       }
       this.getSeriesTv();
     },
