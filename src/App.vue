@@ -1,5 +1,6 @@
 <template>
   <div>
+    ciao
   </div>
 </template>
 
@@ -13,16 +14,13 @@ export default {
       store
     }
   },
-  methods: {
-    getApi() {
-      axios.get(store.apiUrl).then((response) => {
-        console.log(response.data);
-      })
-    }
-  },
   created() {
-    this.getApi()
-  }
+    const url = store.apiUrl + this.store.endPoint.series;
+    console.log(url);
+    axios.get(url, { params: this.store.params }).then((res) => {
+      console.log(res.data.results)
+    })
+  },
 }
 </script>
 
