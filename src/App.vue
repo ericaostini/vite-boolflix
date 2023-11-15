@@ -4,7 +4,7 @@
     <h2>Movies</h2>
     <div class="row">
       <div class="col-12 col-md-4 col-lg-3" v-for="(movie, index) in store.listFilm" :key="movie.id">
-        <PosterComponent :title="movie.title" :orginalT="movie.original_title" :language="movie.original_language"
+        <PosterComponent :title="movie.title" :original="movie.original_title" :language="movie.original_language"
           :vote="movie.vote_average" :image="'https://image.tmdb.org/t/p/w185' + movie.poster_path" />
       </div>
     </div>
