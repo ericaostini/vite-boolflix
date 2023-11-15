@@ -59,8 +59,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use '../assets/style/partials/variables' as *;
+
 .my-card {
     position: relative;
+    padding: 10px;
 
     img {
         width: 100%;
@@ -68,8 +71,13 @@ export default {
     }
 
     .hover-info {
+        background-color: $col-dark;
+        color: $col-light;
+        border: 2px solid $col-light;
+        text-align: center;
+        padding-top: 10px;
         display: none;
-        transition: display 4s;
+        transition: display4s;
     }
 
     &:hover .hover-info {

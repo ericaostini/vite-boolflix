@@ -3,14 +3,15 @@
     <HeaderComponent @filter-series-film="resultSearch" />
     <main>
       <div class="container main-content">
-        <h4 v-show="store.listFilm.length > 1">Film trovati:</h4>
+        <h4 v-show="store.listFilm.length > 1" class="padding-fixed">Film trovati secondo la tua ricerca: {{
+          store.listFilm.length }}</h4>
         <div class="row justify-content-between">
           <div class="col-5 col-md-4 col-lg-3" v-for="(movie, index) in store.listFilm" :key="movie.id">
             <PosterComponent :title="movie.title" :original="movie.original_title" :language="movie.original_language"
               :vote="movie.vote_average" :image="'https://image.tmdb.org/t/p/w185' + movie.poster_path" />
           </div>
         </div>
-        <h4 v-show="store.listFilm.length > 1">Serie Tv trovate</h4>
+        <h4 v-show="store.listFilm.length > 1">Serie Tv trovate secondo la tua ricerca: {{ store.listFilm.length }}</h4>
         <div class="row justify-content-between">
           <div class="col-5 col-md-4 col-lg-3" v-for="(serie, index) in store.listSeries" :key="serie.id">
             <PosterComponent :title="serie.name" :original="serie.original_name" :language="serie.original_language"
@@ -95,10 +96,13 @@ main {
   background-color: $bg-main;
 
   .main-content {
+    .padding-fixed {
+      padding-top: 120px;
+    }
 
     h4 {
       color: $hColor;
-      padding-top: 120px;
+      padding-top: 40px;
       padding-bottom: 10px;
     }
   }
