@@ -11,11 +11,15 @@
     <h2 v-show="store.listFilm.length > 1">Series</h2>
     <div class="row">
       <div class="col-12 col-md-4 col-lg-3" v-for="(serie, index) in store.listSeries" :key="serie.id">
-        <PosterComponent :title="serie.title" :original="serie.original_title" :language="serie.original_language"
+        <PosterComponent :title="serie.name" :original="serie.original_name" :language="serie.original_language"
           :vote="serie.vote_average" :image="'https://image.tmdb.org/t/p/w185' + serie.poster_path" />
       </div>
     </div>
-
+    <div class="col-12" v-if="store.error">
+      <div class="alert alert-danger">
+        {{ store.error }}
+      </div>
+    </div>
   </div>
 </template>
 
@@ -49,13 +53,16 @@ export default {
       this.getSeriesTv();
     },
     getSeriesTv() {
+      store.error = '';
       const seriesurl = this.store.apiUrl + this.store.endPoint.series;
       console.log(seriesurl);
       axios.get(seriesurl, { params: this.params }).then((res) => {
         console.log(res.data.results);
         this.store.listSeries = res.data.results;
         console.log(this.store.listSeries);
-      });
+      }).catch((error) => {
+        this.store.error = error.message
+      })
       const movieurl = this.store.apiUrl + this.store.endPoint.movie;
       console.log(movieurl);
       axios.get(movieurl, { params: this.params }).then((res) => {
@@ -63,6 +70,11 @@ export default {
         this.store.listFilm = res.data.results;
         console.log(this.store.listFilm);
       });
+    },
+    getFlag(flag) {
+      if (flag === "en") {
+        return
+      }
     }
   },
   created() {

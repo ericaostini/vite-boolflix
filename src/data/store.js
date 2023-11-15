@@ -9,5 +9,5 @@ export const store = reactive({
     error: '',
     loading: true,
     listFilm: [],
-    listSeries: []
+    listSeries: [],
 });
