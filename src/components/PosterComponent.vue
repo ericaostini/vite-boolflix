@@ -16,7 +16,7 @@
             </div>
         </div>
         <br>
-        <small>{{ vote }}</small>
+        <small>{{ Math.round(vote) }}</small>
         </p>
         <div>
             <img :src="image">
@@ -27,7 +27,7 @@
 <script>
 export default {
     name: 'PosterComponent',
-    props: ['title', 'original', 'language', 'vote', 'image', 'lang']
+    props: ['title', 'original', 'language', 'vote', 'image', 'lang'],
 }
 </script>
 
