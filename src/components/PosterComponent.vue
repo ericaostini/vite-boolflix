@@ -1,11 +1,13 @@
 <template>
-    <h5>{{ title }}</h5>
-    <p>
-    <h6>{{ original }}</h6> <br>
-    <small>{{ language }}</small> <br>
-    <small>{{ vote }}</small>
-    </p>
-    <img :src="image">
+    <div class="card m-2">
+        <h5>{{ title }}</h5>
+        <p>
+        <h6>{{ original }}</h6> <br>
+        <small>{{ language }}</small> <br>
+        <small>{{ vote }}</small>
+        </p>
+        <img :src="image">
+    </div>
 </template>
 
 <script>

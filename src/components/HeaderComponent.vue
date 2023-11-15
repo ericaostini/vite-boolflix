@@ -4,10 +4,10 @@
             <h1 class="text-danger">Boolflix</h1>
             <form class="row align-items-center">
                 <div class="col-auto">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" v-model="tvShow">
                 </div>
                 <div class="col-auto">
-                    <button class="btn btn-danger">Search</button>
+                    <button type="button" class="btn btn-danger" @click="filterApi">Search</button>
                 </div>
             </form>
         </div>
@@ -15,8 +15,20 @@
 </template>
 
 <script>
+import { store } from "../data/store"
 export default {
-    name: 'HeaderComponent'
+    name: 'HeaderComponent',
+    data() {
+        return {
+            store,
+            tvShow: ""
+        }
+    },
+    methods: {
+        filterApi() {
+            this.$emit("filterSeriesFilm", this.tvShow)
+        }
+    },
 }
 </script>
 
