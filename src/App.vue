@@ -3,6 +3,7 @@
     <HeaderComponent @filter-series-film="resultSearch" />
     <MainComponent v-show="store.listFilm.length < 1" :image="'/images/AtypicalTitle.png'"
       :info="store.bestSeries.overview" />
+    <CarouselComponent v-show="store.listFilm.length < 1" :image="'/images/it.png'" />
     <main>
       <div class="container main-content">
         <h4 v-show="store.listFilm.length > 1" class="padding-fixed">Film trovati secondo la tua ricerca: {{
@@ -38,6 +39,7 @@ import MainComponent from './components/MainComponent.vue';
 import PosterComponent from './components/PosterComponent.vue';
 import { store } from './data/store';
 import axios from 'axios';
+import CarouselComponent from './components/CarouselComponent.vue';
 export default {
   name: "App",
   data() {
@@ -98,7 +100,7 @@ export default {
   created() {
     this.getBest();
   },
-  components: { HeaderComponent, PosterComponent, MainComponent }
+  components: { HeaderComponent, PosterComponent, MainComponent, CarouselComponent }
 }
 </script>
 
