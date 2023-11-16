@@ -6,11 +6,13 @@ export const store = reactive({
         movie: "search/movie",
         series: "search/tv",
         popularFilm: "movie/popular",
+        popularSerie: "tv/popular"
     },
     error: '',
     loading: true,
     listFilm: [],
     listSeries: [],
     bestSeries: [],
-    popularFilms: []
+    popularFilms: [],
+    popularSeries: []
 });

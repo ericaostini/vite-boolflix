@@ -24,13 +24,20 @@
     </div>
     <div class="container mt-4">
       <Carousel :items-to-show="5" :wrap-around="true" :items-to-scroll="5">
-        <Slide v-for="(poster, index) in store.popularFilms" :key="poster.id">
+        <Slide v-for="(pos, index) in store.popularSeries" :key="pos.id">
           <div class="carousel-img">
-            <img :src="'https://image.tmdb.org/t/p/w185' + poster.poster_path">
+            <img :src="'https://image.tmdb.org/t/p/w185' + pos.poster_path">
           </div>
         </Slide>
         <template #addons>
-          <Navigation />
+          <Navigation>
+            <template #next>
+              <i class="fa-solid fa-chevron-right"></i>
+            </template>
+            <template #prev>
+              <i class="fa-solid fa-chevron-left"></i>
+            </template>
+          </Navigation>
         </template>
       </Carousel>
     </div>
@@ -128,19 +135,22 @@ export default {
     getPopularFilm() {
       const popularF = this.store.apiUrl + this.store.endPoint.popularFilm;
       axios.get(popularF, { params: this.params }).then((res) => {
-        console.log(res.data.results[0])
+        console.log(res.data.results)
         this.store.popularFilms = res.data.results;
       })
     },
-    scrollLeft() {
-      this.$nextTick(() => {
-        this.$refs.image[this.$refs.image.length - 1].scrollBy(100, 0);
+    getPopularSeries() {
+      const popularS = this.store.apiUrl + this.store.endPoint.popularSerie;
+      axios.get(popularS, { params: this.params }).then((res) => {
+        console.log(res.data.results)
+        this.store.popularSeries = res.data.results;
       })
     }
   },
   created() {
     this.getBest();
-    this.getPopularFilm()
+    this.getPopularFilm(),
+      this.getPopularSeries()
   },
   components: { HeaderComponent, PosterComponent, MainComponent, Carousel, Slide, Navigation }
 }
@@ -193,4 +203,5 @@ main {
       padding-bottom: 10px;
     }
   }
-}</style>
+}
+</style>
