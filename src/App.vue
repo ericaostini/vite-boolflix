@@ -3,7 +3,8 @@
     <HeaderComponent @filter-series-film="resultSearch" />
     <MainComponent v-show="store.listFilm.length < 1" :image="'/images/AtypicalTitle.png'"
       :info="store.bestSeries.overview" />
-    <div class="container mt-4">
+    <div class="container mt-4" v-show="store.listFilm.length < 1">
+      <h4 class="text-light pb-2">Film del momento</h4>
       <Carousel :items-to-show="5" :wrap-around="true" :items-to-scroll="5">
         <Slide v-for="(poster, index) in store.popularFilms" :key="poster.id">
           <div class="carousel-img">
@@ -22,7 +23,8 @@
         </template>
       </Carousel>
     </div>
-    <div class="container mt-4">
+    <div class="container mt-4" v-show="store.listFilm.length < 1">
+      <h4 class="text-light pb-2">Serie TV più popolari</h4>
       <Carousel :items-to-show="5" :wrap-around="true" :items-to-scroll="5">
         <Slide v-for="(pos, index) in store.popularSeries" :key="pos.id">
           <div class="carousel-img">
@@ -47,16 +49,21 @@
           store.listFilm.length }}</h4>
         <div class="row justify-content-between">
           <div class="col-5 col-md-4 col-lg-3" v-for="(movie, index) in store.listFilm" :key="movie.id">
-            <PosterComponent :title="movie.title" :original="movie.original_title" :language="movie.original_language"
-              :vote="movie.vote_average" :image="'https://image.tmdb.org/t/p/w185' + movie.poster_path" />
+            <PosterComponent v-if="movie.poster_path === null" :title="movie.title" :original="movie.original_title"
+              :language="movie.original_language" :vote="movie.vote_average" :image="'/images/noimage.png'" />
+            <PosterComponent v-else :title="movie.title" :original="movie.original_title"
+              :language="movie.original_language" :vote="movie.vote_average"
+              :image="'https://image.tmdb.org/t/p/w185' + movie.poster_path" />
           </div>
         </div>
         <h4 v-show="store.listFilm.length > 1">Serie Tv trovate secondo la tua ricerca: {{ store.listFilm.length }}</h4>
         <div class="row justify-content-between">
           <div class="col-5 col-md-4 col-lg-3" v-for="(serie, index) in store.listSeries" :key="serie.id">
-            <PosterComponent :title="serie.name" :original="serie.original_name" :language="serie.original_language"
-              :vote="serie.vote_average" :image="'https://image.tmdb.org/t/p/w185' + serie.poster_path"
-              :lang="serie.original_language" />
+            <PosterComponent v-if="serie.poster_path === null" :title="serie.title" :original="serie.original_title"
+              :language="serie.original_language" :vote="serie.vote_average" :image="'/images/noimage.png'" />
+            <PosterComponent v-else :title="serie.name" :original="serie.original_name"
+              :language="serie.original_language" :vote="serie.vote_average"
+              :image="'https://image.tmdb.org/t/p/w185' + serie.poster_path" :lang="serie.original_language" />
           </div>
         </div>
         <div class="col-12" v-if="store.error">

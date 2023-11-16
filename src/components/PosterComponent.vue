@@ -53,9 +53,15 @@
 </template>
 
 <script>
+import { store } from '../data/store'
 export default {
     name: 'PosterComponent',
     props: ['title', 'original', 'language', 'vote', 'image', 'lang'],
+    data() {
+        return {
+            store
+        }
+    },
 }
 </script>
 
