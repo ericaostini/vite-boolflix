@@ -84,7 +84,7 @@ export default {
         text-align: center;
         padding-top: 10px;
         display: none;
-        transition: display4s;
+        transition: display 4s;
     }
 
     &:hover .hover-info {

@@ -10,9 +10,11 @@
           <div class="carousel-img">
             <img :src="'https://image.tmdb.org/t/p/w185' + poster.poster_path">
             <div class="hover-info">
-              <h5>{{ poster.title }} </h5>
+              <div class="d-flex align-items-center justify-content-between">
+                <h5>{{ poster.title }} </h5>
+                <button class="btn"><i class="fa-solid fa-circle-chevron-down fs-4" style="color: #feffff;"></i></button>
+              </div>
               <p class="text-over">{{ poster.overview }}</p>
-              <button class="more"></button>
             </div>
           </div>
         </Slide>
@@ -35,9 +37,11 @@
           <div class="carousel-img">
             <img :src="'https://image.tmdb.org/t/p/w185' + pos.poster_path">
             <div class="hover-info">
-              <h5>{{ pos.name }} </h5>
+              <div class="d-flex align-items-center justify-content-between">
+                <h5>{{ pos.name }} </h5>
+                <button class="btn"><i class="fa-solid fa-circle-chevron-down fs-4" style="color: #feffff;"></i></button>
+              </div>
               <p class="text-over">{{ pos.overview }}</p>
-              <button class="more"></button>
             </div>
           </div>
         </Slide>
@@ -178,27 +182,35 @@ export default {
 
 .carousel-img {
   position: relative;
+  color: white;
 
   img {
     width: 200px;
   }
 
   .hover-info {
+    height: 100%;
+    padding: 10px;
+    text-align: left;
+    padding-top: 130px;
+    background-color: black;
+    opacity: 0.8;
+    float: inline-end;
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    font-size: 15px;
-    color: white;
+    font-size: 12px;
+    display: none;
+    transition: display 4s;
 
     .text-over {
       overflow: hidden;
-      max-height: 8rem;
       -webkit-box-orient: vertical;
       display: -webkit-box;
       overflow: hidden;
       text-overflow: ellipsis;
-      -webkit-line-clamp: 4;
+      -webkit-line-clamp: 3;
     }
   }
 
@@ -207,6 +219,16 @@ export default {
     -ms-transform: scale(1.2);
     -webkit-transform: scale(1.2);
     transform: scale(1.2);
+  }
+
+  &:hover .hover-info {
+    display: flex;
+    flex-flow: column;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
   }
 }
 
