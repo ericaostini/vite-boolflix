@@ -11,7 +11,14 @@
           </div>
         </Slide>
         <template #addons>
-          <Navigation />
+          <Navigation>
+            <template #next>
+              <i class="fa-solid fa-chevron-right"></i>
+            </template>
+            <template #prev>
+              <i class="fa-solid fa-chevron-left"></i>
+            </template>
+          </Navigation>
         </template>
       </Carousel>
     </div>
@@ -146,7 +153,28 @@ export default {
   img {
     width: 200px;
   }
+}
 
+.fa-solid.fa-chevron-right {
+  font-size: 46px;
+  padding-right: 20px;
+  color: white;
+  transition: all 0.4s ease-in-out;
+
+  &:hover {
+    transform: scale(1.4);
+  }
+}
+
+.fa-solid.fa-chevron-left {
+  font-size: 50px;
+  padding-left: 20px;
+  color: white;
+  transition: all 0.5s ease-in-out;
+
+  &:hover {
+    transform: scale(1.4);
+  }
 }
 
 main {
@@ -165,5 +193,4 @@ main {
       padding-bottom: 10px;
     }
   }
-}
-</style>
+}</style>
