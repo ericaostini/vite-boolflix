@@ -1,8 +1,13 @@
 <template>
     <section>
-        <div class="w-50">
+        <div class="main-series">
             <img :src="image">
-            <p class="py-5 text-light ">{{ info }}</p>
+            <p class="py-5 text-light">{{ info }}</p>
+            <div class="d-flex flex-nowrap">
+                <button class="btn btn-light me-3 px-lg-4 px-md-2">Riproduci</button>
+                <button class="btn btn-outline-dark px-lg-4 x-md-2"><i class="fa-solid fa-circle-info"></i> Altre
+                    info</button>
+            </div>
         </div>
     </section>
 </template>
@@ -17,14 +22,17 @@ export default {
 <style lang="scss" scoped>
 section {
     background-image: url("../images/atypical.png");
+    background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
 
-    div {
-        padding: 150px 50px;
+    .main-series {
+        padding: 100px 50px;
+        width: 40%;
 
         img {
-            width: 450px;
+            margin-top: 70px;
+            width: 600px;
         }
     }
 }
