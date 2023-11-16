@@ -3,7 +3,30 @@
     <HeaderComponent @filter-series-film="resultSearch" />
     <MainComponent v-show="store.listFilm.length < 1" :image="'/images/AtypicalTitle.png'"
       :info="store.bestSeries.overview" />
-    <CarouselComponent v-show="store.listFilm.length < 1" :image="'/images/it.png'" />
+    <div class="container mt-4">
+      <Carousel :items-to-show="5" :wrap-around="true" :items-to-scroll="5">
+        <Slide v-for="(poster, index) in store.popularFilms" :key="poster.id">
+          <div class="carousel-img">
+            <img :src="'https://image.tmdb.org/t/p/w185' + poster.poster_path">
+          </div>
+        </Slide>
+        <template #addons>
+          <Navigation />
+        </template>
+      </Carousel>
+    </div>
+    <div class="container mt-4">
+      <Carousel :items-to-show="5" :wrap-around="true" :items-to-scroll="5">
+        <Slide v-for="(poster, index) in store.popularFilms" :key="poster.id">
+          <div class="carousel-img">
+            <img :src="'https://image.tmdb.org/t/p/w185' + poster.poster_path">
+          </div>
+        </Slide>
+        <template #addons>
+          <Navigation />
+        </template>
+      </Carousel>
+    </div>
     <main>
       <div class="container main-content">
         <h4 v-show="store.listFilm.length > 1" class="padding-fixed">Film trovati secondo la tua ricerca: {{
@@ -33,13 +56,14 @@
 </template>
 
 <script>
-import { generateCodeFrame } from '@vue/shared';
 import HeaderComponent from './components/HeaderComponent.vue';
 import MainComponent from './components/MainComponent.vue';
 import PosterComponent from './components/PosterComponent.vue';
 import { store } from './data/store';
 import axios from 'axios';
-import CarouselComponent from './components/CarouselComponent.vue';
+import { defineComponent } from 'vue';
+import { Carousel, Navigation, Slide } from './assets/vue3-carousel';
+import 'vue3-carousel/dist/carousel.css';
 export default {
   name: "App",
   data() {
@@ -54,8 +78,6 @@ export default {
         query: 'Atypical',
       }
     }
-  },
-  created() {
   },
   methods: {
     resultSearch(search) {
@@ -95,20 +117,42 @@ export default {
         console.log(res.data.results[0])
         this.store.bestSeries = res.data.results[0];
       })
+    },
+    getPopularFilm() {
+      const popularF = this.store.apiUrl + this.store.endPoint.popularFilm;
+      axios.get(popularF, { params: this.params }).then((res) => {
+        console.log(res.data.results[0])
+        this.store.popularFilms = res.data.results;
+      })
+    },
+    scrollLeft() {
+      this.$nextTick(() => {
+        this.$refs.image[this.$refs.image.length - 1].scrollBy(100, 0);
+      })
     }
   },
   created() {
     this.getBest();
+    this.getPopularFilm()
   },
-  components: { HeaderComponent, PosterComponent, MainComponent, CarouselComponent }
+  components: { HeaderComponent, PosterComponent, MainComponent, Carousel, Slide, Navigation }
 }
 </script>
 
 <style lang="scss" scoped>
 @use './assets/style/partials/variables' as *;
 
+.carousel-img {
+  img {
+    width: 200px;
+  }
+
+}
+
 main {
+
   background-color: $bg-main;
+
 
   .main-content {
     .padding-fixed {
