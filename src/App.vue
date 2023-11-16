@@ -9,6 +9,11 @@
         <Slide v-for="(poster, index) in store.popularFilms" :key="poster.id">
           <div class="carousel-img">
             <img :src="'https://image.tmdb.org/t/p/w185' + poster.poster_path">
+            <div class="hover-info">
+              <h5>{{ poster.title }} </h5>
+              <p class="text-over">{{ poster.overview }}</p>
+              <button class="more"></button>
+            </div>
           </div>
         </Slide>
         <template #addons>
@@ -29,6 +34,11 @@
         <Slide v-for="(pos, index) in store.popularSeries" :key="pos.id">
           <div class="carousel-img">
             <img :src="'https://image.tmdb.org/t/p/w185' + pos.poster_path">
+            <div class="hover-info">
+              <h5>{{ pos.name }} </h5>
+              <p class="text-over">{{ pos.overview }}</p>
+              <button class="more"></button>
+            </div>
           </div>
         </Slide>
         <template #addons>
@@ -167,8 +177,36 @@ export default {
 @use './assets/style/partials/variables' as *;
 
 .carousel-img {
+  position: relative;
+
   img {
     width: 200px;
+  }
+
+  .hover-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: 15px;
+    color: white;
+
+    .text-over {
+      overflow: hidden;
+      max-height: 8rem;
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -webkit-line-clamp: 4;
+    }
+  }
+
+  &:hover {
+    transition: transform .4s;
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
   }
 }
 
