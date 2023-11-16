@@ -64,10 +64,11 @@
         <div class="row justify-content-between">
           <div class="col-5 col-md-4 col-lg-3" v-for="(movie, index) in store.listFilm" :key="movie.id">
             <PosterComponent v-if="movie.poster_path === null" :title="movie.title" :original="movie.original_title"
-              :language="movie.original_language" :vote="movie.vote_average" :image="'/images/noimage.png'" />
+              :language="movie.original_language" :vote="movie.vote_average" :info="movie.overview"
+              :image="'/images/noimage.png'" />
             <PosterComponent v-else :title="movie.title" :original="movie.original_title"
               :language="movie.original_language" :vote="movie.vote_average"
-              :image="'https://image.tmdb.org/t/p/w185' + movie.poster_path" />
+              :image="'https://image.tmdb.org/t/p/w185' + movie.poster_path" :info="movie.overview" />
           </div>
         </div>
         <h4 v-show="store.listFilm.length > 1">Serie Tv trovate secondo la tua ricerca: {{ store.listFilm.length }}</h4>
