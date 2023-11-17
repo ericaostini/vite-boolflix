@@ -2,7 +2,7 @@
   <div>
     <HeaderComponent @filter-series-film="resultSearch" />
     <MainComponent v-show="store.listFilm.length < 1" :image="'/images/AtypicalTitle.png'"
-      :info="store.bestSeries.overview" />
+      :info="store.bestSeries.overview" @ge-series="filterGenre" />
     <div class="container mt-4" v-show="store.listFilm.length < 1">
       <h4 class="text-light pb-2">Film del momento</h4>
       <Carousel :items-to-show="5" :wrap-around="true" :items-to-scroll="5">
@@ -105,6 +105,7 @@ import 'vue3-carousel/dist/carousel.css';
 // import VideoComponent from './components/VideoComponent.vue'
 export default {
   name: "App",
+  components: { HeaderComponent, PosterComponent, MainComponent, Carousel, Slide, Navigation },
   data() {
     return {
       store,
@@ -170,6 +171,9 @@ export default {
         console.log(res.data.results)
         this.store.popularSeries = res.data.results;
       })
+    },
+    filterGenre(search) {
+      console.log(search)
     }
   },
   created() {
@@ -177,7 +181,6 @@ export default {
     this.getPopularFilm(),
       this.getPopularSeries()
   },
-  components: { HeaderComponent, PosterComponent, MainComponent, Carousel, Slide, Navigation }
 }
 </script>
 

@@ -2,7 +2,8 @@
     <section>
         <div class="main-series">
             <div class="col-lg-4 col-md-8 col-sm-10 mt-4">
-                <select class="form-select" aria-label="Default select example">
+                <h5 class="text-center">Serie TV</h5>
+                <select class="form-select" aria-label="Default select example" @change="getGenre" v-model="type">
                     <option selected>Generi</option>
                     <option value="All">All</option>
                     <option v-for="(g, index) in store.genreSerie" :value="g.name">{{ g.name }}</option>
@@ -28,6 +29,7 @@ export default {
     data() {
         return {
             store,
+            type: "",
             params: {
                 api_key: '99a0ce38f2911d2a4d167d4ff18195e6'
             }
@@ -40,6 +42,9 @@ export default {
                 console.log(res.data.genres)
                 this.store.genreSerie = res.data.genres;
             })
+        },
+        getGenre() {
+            this.$emit("geSeries", this.type)
         }
     },
     created() {
