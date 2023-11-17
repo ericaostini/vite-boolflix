@@ -1,8 +1,8 @@
 <template>
     <section>
         <div class="main-series">
-            <div class="col-lg-4 col-md-8 col-sm-10 mt-4">
-                <h5 class="text-center">Serie TV</h5>
+            <div class="col-lg-4 col-md-8 col-sm-10 mt-3">
+                <h5 class="text-light">Serie TV</h5>
                 <select class="form-select" aria-label="Default select example" @change="getGenre" v-model="type">
                     <option selected>Generi</option>
                     <option value="All">All</option>
