@@ -53,6 +53,7 @@
             <div class="info-over">
                 {{ info }}
             </div>
+
         </div>
     </div>
 </template>
@@ -126,6 +127,21 @@ export default {
     .info-over {
         padding: 10px;
         overflow-y: scroll;
+    }
+
+    .sub-menu-wrap {
+        position: absolute;
+        top: 0;
+        width: 150px;
+        margin-top: 90px;
+        max-height: 0px;
+        overflow: hidden;
+        z-index: 100;
+    }
+
+    .sub-menu-wrap.open-menu {
+        max-height: 100px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
 }
 

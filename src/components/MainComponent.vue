@@ -6,7 +6,7 @@
                 <select class="form-select" aria-label="Default select example" @change="getGenre" v-model="type">
                     <option selected>Generi</option>
                     <option value="All">All</option>
-                    <option v-for="(g, index) in store.genreSerie" :value="g.name">{{ g.name }}</option>
+                    <option v-for="(g, index) in store.genreSeries" :value="g.id">{{ g.name }}</option>
                 </select>
             </div>
             <img :src="image">
@@ -29,7 +29,7 @@ export default {
     data() {
         return {
             store,
-            type: "",
+            type: '',
             params: {
                 api_key: '99a0ce38f2911d2a4d167d4ff18195e6'
             }
@@ -40,7 +40,7 @@ export default {
             const urlGenreS = this.store.apiUrl + this.store.endPoint.genreSerie;
             axios.get(urlGenreS, { params: this.params }).then((res) => {
                 console.log(res.data.genres)
-                this.store.genreSerie = res.data.genres;
+                this.store.genreSeries = res.data.genres;
             })
         },
         getGenre() {

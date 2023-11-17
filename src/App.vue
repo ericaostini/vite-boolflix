@@ -33,14 +33,13 @@
     <div class="container mt-4" v-show="store.listFilm.length < 1">
       <h4 class="text-light pb-2">Serie TV più popolari</h4>
       <Carousel :items-to-show="5" :wrap-around="true" :items-to-scroll="5">
-        <Slide v-for="(pos, index) in store.popularSeries" :key="pos.id">
+        <Slide v-for="(pos, posIndex) in store.popularSeries" :key="posIndex">
           <div class="carousel-img">
             <img :src="'https://image.tmdb.org/t/p/w185' + pos.poster_path">
             <div class="hover-info">
               <div class="d-flex align-items-center justify-content-between">
                 <h5>{{ pos.name }} </h5>
-                <button class="btn" @click="showInfo()"><i class="fa-solid fa-circle-chevron-down fs-4"
-                    style="color: #feffff;"></i></button>
+                <button class="btn"><i class="fa-solid fa-circle-chevron-down fs-4" style="color: #feffff;"></i></button>
               </div>
               <p class="text-over">{{ pos.overview }}</p>
             </div>
@@ -74,7 +73,7 @@
         </div>
         <h4 v-show="store.listFilm.length > 1">Serie Tv trovate secondo la tua ricerca: {{ store.listFilm.length }}</h4>
         <div class="row justify-content-between">
-          <div class="col-5 col-md-4 col-lg-3" v-for="(serie, index) in store.listSeries" :key="serie.id">
+          <div class="col-5 col-md-4 col-lg-3" v-for="(serie, sIndex) in store.listSeries" :key="sIndex">
             <PosterComponent v-if="serie.poster_path === null" :title="serie.title" :original="serie.original_title"
               :language="serie.original_language" :vote="serie.vote_average" :image="'/images/noimage.png'" />
             <PosterComponent v-else :title="serie.name" :original="serie.original_name"
@@ -89,6 +88,11 @@
         </div>
       </div>
     </main>
+  </div>
+  <div class="row justify-content-between">
+    <h3>Serie Tv popolari secondo il genere</h3>
+    <div class="col-5 col-md-4 col-lg-3" v-for="(se, index) in filterG">
+    </div>
   </div>
   <!-- <VideoComponent /> -->
 </template>
@@ -116,7 +120,8 @@ export default {
       top: {
         api_key: '99a0ce38f2911d2a4d167d4ff18195e6',
         query: 'Atypical',
-      }
+      },
+      clickButton: null,
     }
   },
   methods: {
@@ -173,7 +178,8 @@ export default {
       })
     },
     filterGenre(search) {
-      console.log(search)
+      this.store.typeG = search;
+      console.log(this.store.typeG)
     }
   },
   created() {
@@ -181,6 +187,14 @@ export default {
     this.getPopularFilm(),
       this.getPopularSeries()
   },
+  computed: {
+    filterG() {
+      let filterG = this.store.popularSeries.filter((series) => {
+        return series.genre_ids.includes(this.store.typeG)
+      })
+      return filterG;
+    }
+  }
 }
 </script>
 
@@ -237,6 +251,7 @@ export default {
     left: 0;
     bottom: 0;
   }
+
 }
 
 .fa-solid.fa-chevron-right {

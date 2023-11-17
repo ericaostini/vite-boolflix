@@ -2,7 +2,7 @@
     <header>
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center">
-                <h1 class="text-danger p-2 text-uppercase">Boolflix</h1>
+                <h1 class="text-danger p-2 text-uppercase">Netflix</h1>
                 <div class="nav pb-2 px-3">
                     <a href="MainComponent" class="text-decoration-none text-light px-3">Home</a>
                     <a href="#" class="text-decoration-none text-light px-3">Serie TV</a>
