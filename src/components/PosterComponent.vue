@@ -58,14 +58,33 @@
 </template>
 
 <script>
+import axios from 'axios';
 import { store } from '../data/store'
 export default {
     name: 'PosterComponent',
     props: ['title', 'original', 'language', 'vote', 'image', 'info'],
     data() {
         return {
-            store
+            store,
+            front: true,
+            params: {
+                api_key: '99a0ce38f2911d2a4d167d4ff18195e6'
+            }
         }
+    },
+    methods: {
+        // getCastFilm() {
+        //     const myendPoint = this.store.endPoint.movieCast + this.id + '/credits';
+        //     let cast = [];
+        //     axios.get(this.store.apiUrl + myendPoint, { params: this.params }).then((res) => {
+        //         console.log(res.data.cast);
+        //         for (let i = 0; i < 5; i++) {
+        //             if (res.data.cast[i]) {
+        //                 cast.push(res.data.cast[i].name)
+        //             }
+        //         }
+        //     })
+        // }
     },
 }
 </script>

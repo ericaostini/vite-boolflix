@@ -1,9 +1,17 @@
 <template>
     <header>
         <div class="d-flex justify-content-between align-items-center">
-            <h1 class="text-danger p-2 text-uppercase">Boolflix</h1>
+            <div class="d-flex align-items-center">
+                <h1 class="text-danger p-2 text-uppercase">Boolflix</h1>
+                <div class="nav pb-2 px-3">
+                    <a href="#" class="text-decoration-none text-light px-3">Home</a>
+                    <a href="#" class="text-decoration-none text-light px-3">Serie TV</a>
+                    <a href="#" class="text-decoration-none text-light px-3">Film</a>
+                    <a href="#" class="text-decoration-none text-light px-3">La mia lista</a>
+                </div>
+            </div>
             <form class="row align-items-center">
-                <div class="col-auto">
+                <div class="col-md-8 col-sm-6">
                     <input type="text" class="form-control bg-grey border-light" v-model="tvShow" placeholder="Titolo">
                 </div>
                 <div class="col-auto">

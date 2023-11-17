@@ -6,7 +6,8 @@ export const store = reactive({
         movie: "search/movie",
         series: "search/tv",
         popularFilm: "movie/popular",
-        popularSerie: "tv/popular"
+        popularSerie: "tv/popular",
+        movieCast: 'movie/'
     },
     error: '',
     loading: true,

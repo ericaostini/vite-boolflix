@@ -1,6 +1,14 @@
 <template>
     <section>
         <div class="main-series">
+            <div class="col-lg-4 col-md-8 col-sm-10 mt-4">
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Generi</option>
+                    <option value="All">All</option>
+                    <option value="All">All</option>
+                    <option value="All">All</option>
+                </select>
+            </div>
             <img :src="image">
             <p class="py-5 text-light">{{ info }}</p>
             <div class="d-flex flex-nowrap">

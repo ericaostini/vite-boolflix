@@ -39,7 +39,8 @@
             <div class="hover-info">
               <div class="d-flex align-items-center justify-content-between">
                 <h5>{{ pos.name }} </h5>
-                <button class="btn"><i class="fa-solid fa-circle-chevron-down fs-4" style="color: #feffff;"></i></button>
+                <button class="btn" @click="showInfo()"><i class="fa-solid fa-circle-chevron-down fs-4"
+                    style="color: #feffff;"></i></button>
               </div>
               <p class="text-over">{{ pos.overview }}</p>
             </div>
@@ -65,10 +66,10 @@
           <div class="col-5 col-md-4 col-lg-3" v-for="(movie, index) in store.listFilm" :key="movie.id">
             <PosterComponent v-if="movie.poster_path === null" :title="movie.title" :original="movie.original_title"
               :language="movie.original_language" :vote="movie.vote_average" :info="movie.overview"
-              :image="'/images/noimage.png'" />
+              :image="'/images/noimage.png'" :id="movie.id" />
             <PosterComponent v-else :title="movie.title" :original="movie.original_title"
               :language="movie.original_language" :vote="movie.vote_average"
-              :image="'https://image.tmdb.org/t/p/w185' + movie.poster_path" :info="movie.overview" />
+              :image="'https://image.tmdb.org/t/p/w185' + movie.poster_path" :info="movie.overview" :id="movie.id" />
           </div>
         </div>
         <h4 v-show="store.listFilm.length > 1">Serie Tv trovate secondo la tua ricerca: {{ store.listFilm.length }}</h4>
@@ -89,6 +90,7 @@
       </div>
     </main>
   </div>
+  <!-- <VideoComponent /> -->
 </template>
 
 <script>
@@ -100,6 +102,7 @@ import axios from 'axios';
 import { defineComponent } from 'vue';
 import { Carousel, Navigation, Slide } from './assets/vue3-carousel';
 import 'vue3-carousel/dist/carousel.css';
+// import VideoComponent from './components/VideoComponent.vue'
 export default {
   name: "App",
   data() {
