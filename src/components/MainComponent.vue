@@ -5,8 +5,7 @@
                 <select class="form-select" aria-label="Default select example">
                     <option selected>Generi</option>
                     <option value="All">All</option>
-                    <option value="All">All</option>
-                    <option value="All">All</option>
+                    <option v-for="(g, index) in store.genreSerie" :value="g.name">{{ g.name }}</option>
                 </select>
             </div>
             <img :src="image">
@@ -21,9 +20,31 @@
 </template>
 
 <script>
+import axios from 'axios';
+import { store } from '../data/store'
 export default {
     name: 'MainComponent',
-    props: ['image', 'info']
+    props: ['image', 'info'],
+    data() {
+        return {
+            store,
+            params: {
+                api_key: '99a0ce38f2911d2a4d167d4ff18195e6'
+            }
+        }
+    },
+    methods: {
+        getGenreSeries() {
+            const urlGenreS = this.store.apiUrl + this.store.endPoint.genreSerie;
+            axios.get(urlGenreS, { params: this.params }).then((res) => {
+                console.log(res.data.genres)
+                this.store.genreSerie = res.data.genres;
+            })
+        }
+    },
+    created() {
+        this.getGenreSeries()
+    },
 }
 </script>
 
