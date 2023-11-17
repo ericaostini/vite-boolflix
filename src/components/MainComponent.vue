@@ -6,8 +6,8 @@
                     <h5 class="text-light">Serie tv e Film</h5>
                     <select class="form-select" aria-label="Default select example" placeholder="Genere" @change="getGenre"
                         v-model="type">
+                        <option value="" selected hidden>Generi</option>
                         <option selected>Generi</option>
-                        <option value="All">All</option>
                         <option v-for="(g, index) in store.genreSeries" :value="g.id">{{ g.name }}</option>
                     </select>
                 </div>

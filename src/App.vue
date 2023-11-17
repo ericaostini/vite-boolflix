@@ -3,7 +3,7 @@
     <HeaderComponent @filter-series-film="resultSearch" />
     <MainComponent v-show="store.listFilm.length === 0" :image="'/images/AtypicalTitle.png'"
       :info="store.bestSeries.overview" @ge-series="filterGenre" />
-    <div class="container" v-show="filterG.length > 1">
+    <div class="container" v-if="filterG.length > 1">
       <div class="row">
         <h4 class="text-light mt-3">Serie Tv popolari secondo il genere</h4>
         <div class="col-sm-6 col-md-4 col-lg-2" v-for="(se, index) in filterG">
