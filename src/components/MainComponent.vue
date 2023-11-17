@@ -1,13 +1,16 @@
 <template>
     <section>
         <div class="main-series">
-            <div class="col-lg-4 col-md-8 col-sm-10 mt-3">
-                <h5 class="text-light">Serie TV</h5>
-                <select class="form-select" aria-label="Default select example" @change="getGenre" v-model="type">
-                    <option selected>Generi</option>
-                    <option value="All">All</option>
-                    <option v-for="(g, index) in store.genreSeries" :value="g.id">{{ g.name }}</option>
-                </select>
+            <div class="row">
+                <div class="col-lg-4 col-md-8 col-sm-10 mt-3">
+                    <h5 class="text-light">Serie tv e Film</h5>
+                    <select class="form-select" aria-label="Default select example" placeholder="Genere" @change="getGenre"
+                        v-model="type">
+                        <option selected>Generi</option>
+                        <option value="All">All</option>
+                        <option v-for="(g, index) in store.genreSeries" :value="g.id">{{ g.name }}</option>
+                    </select>
+                </div>
             </div>
             <img :src="image">
             <p class="py-5 text-light">{{ info }}</p>
