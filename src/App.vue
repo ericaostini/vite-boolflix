@@ -3,6 +3,16 @@
     <HeaderComponent @filter-series-film="resultSearch" />
     <MainComponent v-show="store.listFilm.length < 1" :image="'/images/AtypicalTitle.png'"
       :info="store.bestSeries.overview" @ge-series="filterGenre" />
+    <div class="row" v-show="filterG.length > 1">
+      <h3>Serie Tv popolari secondo il genere</h3>
+      <div class="col-2 col-md-4 col-lg-2" v-for="(se, index) in filterG">
+        <PosterComponent v-if="se.poster_path === null" :title="se.name" :original="se.original_name"
+          :language="se.original_language" :vote="se.vote_average" :info="se.overview" :image="'/images/noimage.png'"
+          :id="movie.id" />
+        <PosterComponent v-else :title="se.name" :original="se.original_name" :language="se.original_language"
+          :vote="se.vote_average" :image="'https://image.tmdb.org/t/p/w185' + se.poster_path" :info="se.overview" />
+      </div>
+    </div>
     <div class="container mt-4" v-show="store.listFilm.length < 1">
       <h4 class="text-light pb-2">Film del momento</h4>
       <Carousel :items-to-show="5" :wrap-around="true" :items-to-scroll="5">
@@ -88,11 +98,6 @@
         </div>
       </div>
     </main>
-  </div>
-  <div class="row justify-content-between">
-    <h3>Serie Tv popolari secondo il genere</h3>
-    <div class="col-5 col-md-4 col-lg-3" v-for="(se, index) in filterG">
-    </div>
   </div>
   <!-- <VideoComponent /> -->
 </template>
@@ -192,6 +197,7 @@ export default {
       let filterG = this.store.popularSeries.filter((series) => {
         return series.genre_ids.includes(this.store.typeG)
       })
+      console.log(filterG)
       return filterG;
     }
   }
