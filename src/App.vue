@@ -82,8 +82,9 @@
     </div>
     <main>
       <div class="container main-content">
-        <h4 v-show="store.listFilm.length > 1" class="padding-fixed">Film trovati secondo la tua ricerca: {{
-          store.listFilm.length }}</h4>
+        <h4 v-show="store.listFilm.length > 1" class="padding-fixed">Film trovati secondo la tua ricerca: <span
+            class="badge bg-dark text-secondary">{{
+              store.listFilm.length }}</span></h4>
         <div class="row justify-content-between">
           <div class="col-5 col-md-4 col-lg-3" v-for="(movie, index) in store.listFilm" :key="movie.id">
             <PosterComponent v-if="movie.poster_path === null" :title="movie.title" :original="movie.original_title"
@@ -94,7 +95,9 @@
               :image="'https://image.tmdb.org/t/p/w185' + movie.poster_path" :info="movie.overview" :id="movie.id" />
           </div>
         </div>
-        <h4 v-show="store.listFilm.length > 1">Serie Tv trovate secondo la tua ricerca: {{ store.listFilm.length }}</h4>
+        <h4 v-show="store.listFilm.length > 1">Serie Tv trovate secondo la tua ricerca: <span
+            class="badge bg-dark text-secondary">
+            {{ store.listFilm.length }}</span></h4>
         <div class="row justify-content-between">
           <div class="col-5 col-md-4 col-lg-3" v-for="(serie, sIndex) in store.listSeries" :key="sIndex">
             <PosterComponent v-if="serie.poster_path === null" :title="serie.title" :original="serie.original_title"

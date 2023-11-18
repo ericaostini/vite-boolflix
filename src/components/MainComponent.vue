@@ -3,7 +3,7 @@
         <div class="main-series">
             <div class="row">
                 <div class="col-lg-4 col-md-8 col-sm-10 mt-3">
-                    <h5 class="text-light">Serie tv e Film popolari</h5>
+                    <h5 class="text-light">Serie tv e Film</h5>
                     <select class="form-select" aria-label="Default select example" placeholder="Genere" @change="getGenre"
                         v-model="type">
                         <option value="" selected hidden>Generi</option>
