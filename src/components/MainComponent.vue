@@ -16,9 +16,13 @@
             <p class="py-5 text-light">{{ info }}</p>
             <div class="d-flex flex-nowrap">
                 <button class="btn btn-light me-3 px-lg-4 px-md-2">Riproduci</button>
-                <button class="btn btn-outline-dark px-lg-4 x-md-2"><i class="fa-solid fa-circle-info"></i> Altre
+                <button class="btn btn-outline-dark px-lg-4 x-md-2" @click="dropDown()"><i
+                        class="fa-solid fa-circle-info"></i> Altre
                     info</button>
             </div>
+        </div>
+        <div id="info" class="info">
+            <p>{{ name }}</p>
         </div>
     </section>
 </template>
@@ -28,7 +32,7 @@ import axios from 'axios';
 import { store } from '../data/store'
 export default {
     name: 'MainComponent',
-    props: ['image', 'info'],
+    props: ['image', 'info', 'name'],
     data() {
         return {
             store,
@@ -48,6 +52,10 @@ export default {
         },
         getGenre() {
             this.$emit("geSeries", this.type)
+        },
+        dropDown() {
+            let subInfo = document.getElementById("info");
+            subInfo.classList.toggle("show")
         }
     },
     created() {
@@ -57,6 +65,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use '.././assets/style/partials/variables' as *;
+
 section {
     background-image: url("../images/atypical.png");
     background-position: center;
@@ -71,6 +81,22 @@ section {
             margin-top: 70px;
             width: 600px;
         }
+
     }
+}
+
+.info {
+    background-color: $bg-main;
+    color: white;
+    width: 50%;
+    position: absolute;
+    top: 200px;
+    left: 100px;
+    right: 100px;
+    display: block;
+}
+
+.show {
+    display: block;
 }
 </style>

@@ -2,7 +2,7 @@
   <div>
     <HeaderComponent @filter-series-film="resultSearch" />
     <MainComponent v-show="store.listFilm.length === 0" :image="'/images/AtypicalTitle.png'"
-      :info="store.bestSeries.overview" @ge-series="filterGenre" />
+      :info="store.bestSeries.overview" :name="store.bestSeries.name" @ge-series="filterGenre" />
     <div class="container" v-if="filterG.length > 1">
       <div class="row">
         <h4 class="text-light mt-3">Serie Tv popolari secondo il genere</h4>
@@ -143,6 +143,7 @@ export default {
         query: 'Atypical',
       },
       clickButton: null,
+      activeIndex: null
     }
   },
   methods: {
@@ -201,7 +202,7 @@ export default {
     filterGenre(search) {
       this.store.typeG = search;
       console.log(this.store.typeG)
-    }
+    },
   },
   created() {
     this.getBest();
@@ -303,6 +304,21 @@ export default {
   &:hover {
     transform: scale(1.4);
   }
+
+}
+
+.info {
+  color: black;
+  position: absolute;
+  top: 20px;
+  background-color: white;
+  border: 1px solid red;
+  max-height: 50px;
+}
+
+.info.show {
+  max-height: 200px;
+  background-color: blue;
 }
 
 main {
