@@ -22,7 +22,12 @@
             </div>
         </div>
         <div id="info" class="info">
-            <p>{{ name }}</p>
+            <img :src="image">
+            <h5 class="px-4">Guarda subito la stagione 3</h5>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/Ubo7jccr-DY?si=Ynr4_ouDerwi9QTT"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
         </div>
     </section>
 </template>
@@ -88,12 +93,21 @@ section {
 .info {
     background-color: $bg-main;
     color: white;
-    width: 50%;
+    width: 70%;
     position: absolute;
     top: 200px;
     left: 100px;
     right: 100px;
     display: block;
+
+    img {
+        width: 200px;
+        padding: 20px;
+    }
+
+    iframe {
+        padding: 20px;
+    }
 }
 
 .show {
