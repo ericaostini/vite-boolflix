@@ -16,18 +16,28 @@
             <p class="py-5 text-light">{{ info }}</p>
             <div class="d-flex flex-nowrap">
                 <button class="btn btn-light me-3 px-lg-4 px-md-2">Riproduci</button>
-                <button class="btn btn-outline-dark px-lg-4 x-md-2" @click="dropDown()"><i
+                <button class="btn btn-outline-dark px-lg-4 x-md-2" @click.prevent="showOffcanvasMenu()"><i
                         class="fa-solid fa-circle-info"></i> Altre
                     info</button>
             </div>
         </div>
-        <div id="info" class="info">
-            <img :src="image">
-            <h5 class="px-4">Guarda subito la stagione 3</h5>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/Ubo7jccr-DY?si=Ynr4_ouDerwi9QTT"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe>
+        <div id="app" class="container py-2">
+            <div class="offcanvas bg-dark offcanvas-start" :class="showMenu ? 'show' : ''" tabindex="-1"
+                :style="{ visibility: showMenu ? 'visible' : 'hidden' }">
+                <div class="offcanvas-header offcanvas-img">
+                    <img :src="image">
+                    <button type="button" class="btn" @click.prevent="showOffcanvasMenu()"><i
+                            class="fa-regular fa-circle-xmark text-light"></i></button>
+                </div>
+                <div class="offcanvas-body">
+                    <p class="text-light">2021 -<span> 4 stagioni</span><span class="badge">HD</span></p>
+                    <h5 class="text-light">Guarda subito la stagione 3</h5>
+                    <iframe width="320" height="200" src="https://www.youtube.com/embed/Ubo7jccr-DY?si=Ynr4_ouDerwi9QTT"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
         </div>
     </section>
 </template>
@@ -44,7 +54,8 @@ export default {
             type: '',
             params: {
                 api_key: '99a0ce38f2911d2a4d167d4ff18195e6'
-            }
+            },
+            showMenu: false,
         }
     },
     methods: {
@@ -58,9 +69,8 @@ export default {
         getGenre() {
             this.$emit("geSeries", this.type)
         },
-        dropDown() {
-            let subInfo = document.getElementById("info");
-            subInfo.classList.toggle("show")
+        showOffcanvasMenu() {
+            this.showMenu ? this.showMenu = false : this.showMenu = true;
         }
     },
     created() {
@@ -86,31 +96,12 @@ section {
             margin-top: 70px;
             width: 600px;
         }
-
     }
 }
 
-.info {
-    background-color: $bg-main;
-    color: white;
-    width: 70%;
-    position: absolute;
-    top: 200px;
-    left: 100px;
-    right: 100px;
-    display: block;
-
+.offcanvas-img {
     img {
-        width: 200px;
-        padding: 20px;
+        width: 300px;
     }
-
-    iframe {
-        padding: 20px;
-    }
-}
-
-.show {
-    display: block;
 }
 </style>
