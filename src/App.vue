@@ -3,6 +3,17 @@
     <HeaderComponent @filter-series-film="resultSearch" />
     <MainComponent v-show="store.listFilm.length === 0" :image="'/images/AtypicalTitle.png'"
       :info="store.bestSeries.overview" :name="store.bestSeries.name" @ge-series="filterGenre" />
+    <!-- <div class="root">
+      <button @click="isOpen = true">open</button>
+      <teleport to='body'>
+        <div class="modal" v-if="isOpen">
+          <div>
+            <h2>Ciao</h2>
+            <button @click="isOpen = false">close</button>
+          </div>
+        </div>
+      </teleport>
+    </div> -->
     <div class="container" v-if="filterG.length > 1">
       <div class="row">
         <h4 class="text-light mt-3">Serie Tv popolari secondo il genere</h4>
@@ -35,9 +46,18 @@
             <div class="hover-info">
               <div class="d-flex align-items-center justify-content-between">
                 <h5>{{ poster.title }} </h5>
-                <button class="btn"><i class="fa-solid fa-circle-chevron-down fs-4" style="color: #feffff;"></i></button>
+                <div class="root">
+                  <button @click="isOpen = true">open</button>
+                  <teleport to='body'>
+                    <div class="modal" v-if="isOpen">
+                      <div>
+                        <p class="text-over">{{ poster.overview }}</p>
+                        <button @click="isOpen = false">close</button>
+                      </div>
+                    </div>
+                  </teleport>
+                </div>
               </div>
-              <p class="text-over">{{ poster.overview }}</p>
             </div>
           </div>
         </Slide>
@@ -124,16 +144,18 @@ import MainComponent from './components/MainComponent.vue';
 import PosterComponent from './components/PosterComponent.vue';
 import { store } from './data/store';
 import axios from 'axios';
+import { ref } from 'vue';
 import { defineComponent } from 'vue';
 import { Carousel, Navigation, Slide } from './assets/vue3-carousel';
 import 'vue3-carousel/dist/carousel.css';
-// import VideoComponent from './components/VideoComponent.vue'
+const isOpen = ref(false);
 export default {
   name: "App",
   components: { HeaderComponent, PosterComponent, MainComponent, Carousel, Slide, Navigation },
   data() {
     return {
       store,
+      isOpen,
       params: {
         api_key: '99a0ce38f2911d2a4d167d4ff18195e6',
         query: null
@@ -230,6 +252,22 @@ export default {
 
 <style lang="scss" scoped>
 @use './assets/style/partials/variables' as *;
+
+.root {
+  position: relative;
+}
+
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .carousel-img {
   position: relative;

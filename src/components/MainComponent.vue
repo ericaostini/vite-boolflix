@@ -22,7 +22,7 @@
             </div>
         </div>
         <div id="app" class="container py-2">
-            <div class="offcanvas bg-dark offcanvas-start" :class="showMenu ? 'show' : ''" tabindex="-1"
+            <div class="offcanvas text-bg-dark offcanvas-start" :class="showMenu ? 'show' : ''" tabindex="-1"
                 :style="{ visibility: showMenu ? 'visible' : 'hidden' }">
                 <div class="offcanvas-header offcanvas-img">
                     <img :src="image">
@@ -44,7 +44,7 @@
 
 <script>
 import axios from 'axios';
-import { store } from '../data/store'
+import { store } from '../data/store';
 export default {
     name: 'MainComponent',
     props: ['image', 'info', 'name'],
@@ -52,6 +52,7 @@ export default {
         return {
             store,
             type: '',
+            open: false,
             params: {
                 api_key: '99a0ce38f2911d2a4d167d4ff18195e6'
             },
