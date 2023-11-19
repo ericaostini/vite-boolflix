@@ -3,17 +3,6 @@
     <HeaderComponent @filter-series-film="resultSearch" />
     <MainComponent v-show="store.listFilm.length === 0" :image="'/images/AtypicalTitle.png'"
       :info="store.bestSeries.overview" :name="store.bestSeries.name" @ge-series="filterGenre" />
-    <!-- <div class="root">
-      <button @click="isOpen = true">open</button>
-      <teleport to='body'>
-        <div class="modal" v-if="isOpen">
-          <div>
-            <h2>Ciao</h2>
-            <button @click="isOpen = false">close</button>
-          </div>
-        </div>
-      </teleport>
-    </div> -->
     <div class="container" v-if="filterG.length > 1">
       <div class="row">
         <h4 class="text-light mt-3">Serie Tv popolari secondo il genere</h4>
@@ -46,18 +35,15 @@
             <div class="hover-info">
               <div class="d-flex align-items-center justify-content-between">
                 <h5>{{ poster.title }} </h5>
-                <div class="root">
-                  <button @click="isOpen = true">open</button>
-                  <teleport to='body'>
-                    <div class="modal" v-if="isOpen">
-                      <div>
-                        <p class="text-over">{{ poster.overview }}</p>
-                        <button @click="isOpen = false">close</button>
-                      </div>
-                    </div>
-                  </teleport>
-                </div>
               </div>
+            </div>
+          </div>
+          <div class="inside">
+            <div class="icon m-auto"><i class="fa-solid fa-circle-info" style="color: #feffff;"></i></div>
+            <div class="contents">
+              <h5 class="text-light">{{ poster.title }} </h5>
+              <p class="text-over">{{ poster.overview }}</p>
+              <i class="fa-solid fa-circle-play fs-4" style="color: #feffff;"></i>
             </div>
           </div>
         </Slide>
@@ -82,9 +68,15 @@
             <div class="hover-info">
               <div class="d-flex align-items-center justify-content-between">
                 <h5>{{ pos.name }} </h5>
-                <button class="btn"><i class="fa-solid fa-circle-chevron-down fs-4" style="color: #feffff;"></i></button>
               </div>
+            </div>
+          </div>
+          <div class="inside">
+            <div class="icon m-auto"><i class="fa-solid fa-circle-info" style="color: #feffff;"></i></div>
+            <div class="contents">
+              <h5 class="text-light">{{ pos.name }} </h5>
               <p class="text-over">{{ pos.overview }}</p>
+              <i class="fa-solid fa-circle-play fs-4" style="color: #feffff;"></i>
             </div>
           </div>
         </Slide>
@@ -144,18 +136,16 @@ import MainComponent from './components/MainComponent.vue';
 import PosterComponent from './components/PosterComponent.vue';
 import { store } from './data/store';
 import axios from 'axios';
-import { ref } from 'vue';
 import { defineComponent } from 'vue';
 import { Carousel, Navigation, Slide } from './assets/vue3-carousel';
 import 'vue3-carousel/dist/carousel.css';
-const isOpen = ref(false);
+// import VideoComponent from './components/VideoComponent.vue'
 export default {
   name: "App",
   components: { HeaderComponent, PosterComponent, MainComponent, Carousel, Slide, Navigation },
   data() {
     return {
       store,
-      isOpen,
       params: {
         api_key: '99a0ce38f2911d2a4d167d4ff18195e6',
         query: null
@@ -253,22 +243,6 @@ export default {
 <style lang="scss" scoped>
 @use './assets/style/partials/variables' as *;
 
-.root {
-  position: relative;
-}
-
-.modal {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: black;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .carousel-img {
   position: relative;
   color: white;
@@ -293,14 +267,6 @@ export default {
     display: none;
     transition: display 4s;
 
-    .text-over {
-      overflow: hidden;
-      -webkit-box-orient: vertical;
-      display: -webkit-box;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      -webkit-line-clamp: 3;
-    }
   }
 
   &:hover {
@@ -320,6 +286,62 @@ export default {
     bottom: 0;
   }
 
+}
+
+.text-over {
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  color: $col-light;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 7;
+}
+
+.inside {
+  z-index: 9;
+  background: $bg-main;
+  width: 45px;
+  height: 45px;
+  position: absolute;
+  top: 0;
+  right: 25px;
+  transition: all 0.5s, border-radius 2s, top 1s;
+  overflow: hidden;
+
+  .icon {
+    top: 10px;
+    left: 15px;
+    position: absolute;
+    opacity: 1;
+  }
+
+  &:hover {
+    width: 100%;
+    right: 0;
+    top: 0;
+    border-radius: 0;
+    height: 100%;
+
+    .icon {
+      opacity: 0;
+    }
+
+    .contents {
+      opacity: 1;
+      transform: scale(1);
+      transform: translateY(0);
+      overflow: scroll;
+    }
+  }
+
+  .contents {
+    overflow: scroll;
+    padding: 5%;
+    opacity: 0;
+    transform: scale(0.5);
+    transform: translateY(-200%);
+    transition: opacity 0.2s, transform 0.8s;
+  }
 }
 
 .fa-solid.fa-chevron-right {
@@ -345,19 +367,7 @@ export default {
 
 }
 
-.info {
-  color: black;
-  position: absolute;
-  top: 20px;
-  background-color: white;
-  border: 1px solid red;
-  max-height: 50px;
-}
 
-.info.show {
-  max-height: 200px;
-  background-color: blue;
-}
 
 main {
 
