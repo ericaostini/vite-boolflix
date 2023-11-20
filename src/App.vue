@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HeaderComponent @filter-series-film="resultSearch" />
+    <HeaderComponent @filter-series-film="resultSearch" @keyup-filter="resultSearch" />
     <MainComponent v-show="store.listFilm.length === 0" :image="'/images/AtypicalTitle.png'"
       :info="store.bestSeries.overview" :name="store.bestSeries.name" @ge-series="filterGenre" />
     <div class="container" v-if="filterG.length > 1">

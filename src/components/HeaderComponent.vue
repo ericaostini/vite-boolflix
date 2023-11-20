@@ -15,7 +15,7 @@
                     <input type="text" class="form-control bg-grey border-light" v-model="tvShow" placeholder="Titolo">
                 </div>
                 <div class="col-auto">
-                    <button type="button" class="btn btn-danger" @click="filterApi"><i
+                    <button type="button" class="btn btn-danger" @click="filterApi" @keyup.enter="keyApi"><i
                             class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </form>
@@ -36,6 +36,9 @@ export default {
     methods: {
         filterApi() {
             this.$emit("filterSeriesFilm", this.tvShow)
+        },
+        keyApi() {
+            this.$emit("keyupFilter", this.tvShow)
         }
     },
 }
