@@ -150,10 +150,6 @@ export default {
         api_key: '99a0ce38f2911d2a4d167d4ff18195e6',
         query: null
       },
-      top: {
-        api_key: '99a0ce38f2911d2a4d167d4ff18195e6',
-        query: 'Atypical',
-      },
       clickButton: null,
       activeIndex: null
     }
@@ -191,10 +187,10 @@ export default {
       })
     },
     getBest() {
-      const seriesurl = this.store.apiUrl + this.store.endPoint.series
-      axios.get(seriesurl, { params: this.top }).then((res) => {
-        console.log(res.data.results[0])
-        this.store.bestSeries = res.data.results[0];
+      const seriesurl = this.store.apiUrl + this.store.endPoint.serieId;
+      axios.get(seriesurl, { params: this.params }).then((res) => {
+        console.log(res.data)
+        this.store.bestSeries = res.data;
       })
     },
     getPopularFilm() {
