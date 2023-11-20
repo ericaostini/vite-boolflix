@@ -29,7 +29,7 @@
     <div class="container mt-4" v-show="store.listFilm.length < 1">
       <h4 class="text-light pb-2">Film del momento</h4>
       <Carousel :items-to-show="5" :wrap-around="true" :items-to-scroll="5">
-        <Slide v-for="(poster, index) in store.popularFilms" :key="poster.id">
+        <Slide v-for="(poster, index) in store.popularFilms" :key="poster.id" class="col-md-6 col-auto ">
           <div class="carousel-img">
             <img :src="'https://image.tmdb.org/t/p/w185' + poster.poster_path">
             <div class="hover-info">
