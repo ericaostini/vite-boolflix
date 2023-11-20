@@ -95,6 +95,7 @@ export default {
 .my-card {
     position: relative;
     padding: 10px;
+    animation: floating 5s ease-in-out infinite;
 
     img {
         width: 100%;
@@ -148,6 +149,18 @@ export default {
     img {
         height: 22px;
         width: 35px;
+    }
+}
+
+@keyframes floating {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
     }
 }
 </style>
