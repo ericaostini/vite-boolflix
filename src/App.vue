@@ -6,7 +6,7 @@
     <div class="container" v-if="filterG.length > 1">
       <div class="row">
         <h4 class="text-light mt-3">Serie Tv popolari secondo il genere</h4>
-        <div class="col-sm-6 col-md-4 col-lg-2" v-for="(se, index) in filterG">
+        <div class="col-sm-6 col-md-4 col-lg-3" v-for="(se, index) in filterG">
           <PosterComponent v-if="se.poster_path === null" :title="se.name" :original="se.original_name"
             :language="se.original_language" :vote="se.vote_average" :info="se.overview" :image="'/images/noimage.png'"
             :id="movie.id" />
@@ -18,7 +18,7 @@
     <div class="container" v-show="filterFilm.length > 1">
       <div class="row">
         <h4 class="text-light mt-3">Film popolari secondo il genere</h4>
-        <div class="col-sm-6 col-md-4 col-lg-2" v-for="(fi, index) in filterFilm">
+        <div class="col-sm-6 col-md-4 col-lg-3" v-for="(fi, index) in filterFilm">
           <PosterComponent v-if="fi.poster_path === null" :title="fi.title" :original="fi.original_title"
             :language="fi.original_language" :vote="fi.vote_average" :info="fi.overview" :image="'/images/noimage.png'" />
           <PosterComponent v-else :title="fi.title" :original="fi.original_title" :language="fi.original_language"
@@ -26,10 +26,10 @@
         </div>
       </div>
     </div>
-    <div class="container mt-4" v-show="store.listFilm.length < 1">
+    <div class="container mt-5" v-show="store.listFilm.length < 1">
       <h4 class="text-light pb-2">Film del momento</h4>
-      <Carousel :items-to-show="5" :wrap-around="true" :items-to-scroll="5">
-        <Slide v-for="(poster, index) in store.popularFilms" :key="poster.id" class="col-md-6 col-auto ">
+      <Carousel :items-to-show="5.5" :wrap-around="false" :items-to-scroll="1">
+        <Slide v-for="(poster, index) in store.popularFilms" :key="poster.id" class="col-md-6 col-auto">
           <div class="carousel-img">
             <img :src="'https://image.tmdb.org/t/p/w185' + poster.poster_path">
             <div class="hover-info">
@@ -59,9 +59,9 @@
         </template>
       </Carousel>
     </div>
-    <div class="container mt-4" v-show="store.listFilm.length < 1">
+    <div class="container mt-5 mb-5" v-show="store.listFilm.length < 1">
       <h4 class="text-light pb-2">Serie TV più popolari</h4>
-      <Carousel :items-to-show="5" :wrap-around="true" :items-to-scroll="5">
+      <Carousel :items-to-show="5.5" :wrap-around="false" :items-to-scroll="1">
         <Slide v-for="(pos, posIndex) in store.popularSeries" :key="posIndex">
           <div class="carousel-img">
             <img :src="'https://image.tmdb.org/t/p/w185' + pos.poster_path">
@@ -137,7 +137,7 @@ import PosterComponent from './components/PosterComponent.vue';
 import { store } from './data/store';
 import axios from 'axios';
 import { defineComponent } from 'vue';
-import { Carousel, Navigation, Slide } from './assets/vue3-carousel';
+import { Carousel, Slide, Navigation } from 'vue3-carousel';
 import 'vue3-carousel/dist/carousel.css';
 // import VideoComponent from './components/VideoComponent.vue'
 export default {
@@ -250,7 +250,7 @@ export default {
   .hover-info {
     height: 100%;
     padding: 10px;
-    text-align: left;
+    text-align: center;
     padding-top: 130px;
     background-color: black;
     opacity: 0.8;

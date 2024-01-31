@@ -20,5 +20,5 @@ export const store = reactive({
     popularSeries: [],
     genreSeries: [],
     typeG: '',
-    episodeSes: []
+    episodeSes: [],
 });

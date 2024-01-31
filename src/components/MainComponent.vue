@@ -1,17 +1,6 @@
 <template>
     <section>
         <div class="main-series">
-            <div class="row">
-                <div class="col-lg-4 col-md-8 col-sm-10 mt-3">
-                    <h5 class="text-light">Serie tv e Film</h5>
-                    <select class="form-select" aria-label="Default select example" placeholder="Genere" @change="getGenre"
-                        v-model="type">
-                        <option value="" selected hidden>Generi</option>
-                        <option selected>Generi</option>
-                        <option v-for="(g, index) in store.genreSeries" :value="g.id">{{ g.name }}</option>
-                    </select>
-                </div>
-            </div>
             <img :src="image">
             <p class="py-5 text-light">{{ info }}</p>
             <div class="d-flex flex-nowrap">
@@ -72,6 +61,19 @@
             </div>
         </div>
     </section>
+    <div class="container">
+        <div class="row justify-content-end">
+            <div class="col-lg-2 col-md-8 col-sm-10 mt-5">
+                <h5 class="text-light">Filtra Serie tv e Film</h5>
+                <select class="form-select" aria-label="Default select example" placeholder="Genere" @change="getGenre"
+                    v-model="type">
+                    <option value="" selected hidden>Generi</option>
+                    <option selected>Generi</option>
+                    <option v-for="(g, index) in store.genreSeries" :value="g.id">{{ g.name }}</option>
+                </select>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -130,8 +132,8 @@ section {
     background-repeat: no-repeat;
 
     .main-series {
-        padding: 100px 50px;
-        width: 40%;
+        padding: 150px 80px;
+        width: 50%;
 
         img {
             margin-top: 70px;
